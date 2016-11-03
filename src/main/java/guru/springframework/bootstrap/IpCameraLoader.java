@@ -27,7 +27,7 @@ public class IpCameraLoader implements ApplicationListener<ContextRefreshedEvent
     	if(ipCameraRepository.findByName("Edimax").size()==0){
         IpCamera ipCamera = new IpCamera();
         ipCamera.setAlias("Edimax");
-        ipCamera.setConnectionURL("http://192.168.1.108/axis-cgi/mjpg/video.cgi?camera=2");
+        ipCamera.setConnectionURL("http://192.168.1.150/mjpg/video.mjpg");
         ipCamera.setName("Edimax");
         ipCamera.setType("MJPEG");
         ipCamera.setUsername("admin");

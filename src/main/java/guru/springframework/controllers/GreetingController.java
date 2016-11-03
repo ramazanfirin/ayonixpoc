@@ -12,14 +12,23 @@ import guru.springframework.swing.dto.AlarmDTO;
 import guru.springframework.swing.util.ConverterUtil;
 
 @Controller
-public class IndexController {
+public class GreetingController {
+
 	@Autowired
     private SimpMessagingTemplate template;
-	
-    @RequestMapping("/")
-    String index(){
-        return "index";
+
+	@RequestMapping(value = "/aaa")
+    @MessageMapping("/hello")
+    @SendTo("/topic/greetings")
+    public AlarmDTO greeting(AlarmDTO alarmDTO) throws Exception {
+        
+    	Thread.sleep(1000); // simulated delay
+        return alarmDTO;
     }
 
-    
+    public void fireGreeting(Alarm message) {
+    	AlarmDTO alarmDTO = ConverterUtil.convertAlarm(message);
+        System.out.println("Fire");
+        this.template.convertAndSend("/topic/greetings", alarmDTO);
+    }
 }

@@ -10,7 +10,9 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import guru.springframework.domain.Alarm;
 import guru.springframework.domain.Person;
+import guru.springframework.swing.dto.AlarmDTO;
 
 public class ConverterUtil {
 
@@ -40,6 +42,18 @@ public class ConverterUtil {
 		
 		return c.getTime();
 	}
+	
+	public static AlarmDTO convertAlarm(Alarm alarm){
+		AlarmDTO dto = new AlarmDTO();
+		dto.setDate(alarm.getInsertDate().toString());
+		dto.setImage(alarm.getAlarmImage());
+        dto.setName(alarm.getPerson().getName());
+        dto.setSurname(alarm.getPerson().getSurname());
+        dto.setScore(alarm.getScore().toString());
+		
+		return dto;
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(convertDate(new Date()));
 	}

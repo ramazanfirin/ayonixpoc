@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -15,6 +16,7 @@ import javax.swing.JTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
+import guru.springframework.controllers.GreetingController;
 import guru.springframework.domain.Alarm;
 import guru.springframework.services.AlarmService;
 import guru.springframework.swing.util.ConverterUtil;
@@ -66,6 +68,12 @@ public class AlarmReportPanel extends JPanel{
 				alarmList = alarmService.search(ConverterUtil.modifyDate(startDate, 0, 0, 0), ConverterUtil.modifyDate(endDate, 23, 59, 59));
 				AlarmTableModel model = new AlarmTableModel(alarmList);
 				table.setModel(model);
+				
+//				for (Iterator iterator = alarmList.iterator(); iterator.hasNext();) {
+//					Alarm alarm = (Alarm) iterator.next();
+//					GreetingController asd =context.getBean(GreetingController.class);
+//					asd.fireGreeting(alarm);
+//				}
 			}
 		});
 		add(btnNewButton, "flowx,cell 0 2");

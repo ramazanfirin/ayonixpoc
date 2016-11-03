@@ -1,8 +1,5 @@
 package guru.springframework;
 
-import guru.springframework.swing.WebcamPanelExample;
-
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 

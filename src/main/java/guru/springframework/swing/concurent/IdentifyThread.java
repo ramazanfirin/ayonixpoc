@@ -22,6 +22,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 
 import ayonix.FaceID;
+import guru.springframework.controllers.GreetingController;
 import guru.springframework.domain.Alarm;
 import guru.springframework.domain.Person;
 import guru.springframework.services.AlarmService;
@@ -131,6 +132,8 @@ public	class IdentifyThread extends Thread {
 				
 				AlarmService service = context.getBean(AlarmService.class);
 				service.save(alarm);
+				GreetingController controller = context.getBean(GreetingController.class);
+				controller.fireGreeting(alarm);
 			}
 			
 		    

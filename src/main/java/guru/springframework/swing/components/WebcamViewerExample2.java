@@ -209,6 +209,7 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 		picker = new WebcamPicker();
 		picker.addItemListener(this);
 		webcam = picker.getSelectedWebcam();
+		//webcam  = (Webcam)picker.getItemAt(1);
 		
 		startButton.addActionListener(new ActionListener() {
 		    @Override
@@ -236,7 +237,7 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 			System.exit(1);
 		}
 
-		webcam.setViewSize(WebcamResolution.VGA.getSize());
+		//webcam.setViewSize(WebcamResolution.VGA.getSize());
 		panel = new WebcamPanel(webcam, false);
 		panel.setFPSDisplayed(true);
 		panel.setFPSLimit(5d);
@@ -288,7 +289,7 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 
 				panel.stop();
 
-				remove(panel);
+				capture.remove(panel);
 
 				//webcam.removeWebcamListener(this);
 				WebcamListener as[] = webcam.getWebcamListeners();
@@ -298,7 +299,7 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 				webcam.close();
 
 				webcam = (Webcam) e.getItem();
-				//webcam.setViewSize(WebcamResolution.VGA.getSize());
+				//webcam.setViewSize(WebcamResolution.SXGA.getSize());
 				//webcam.addWebcamListener(this);
 				IpCameraListener cameraListener = new IpCameraListener(sdk, personMap, context);
 				webcam.addWebcamListener(cameraListener);
@@ -308,8 +309,11 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 
 				panel = new WebcamPanel(webcam, false);
 				panel.setFPSDisplayed(true);
+				panel.setFPSLimit(5d);
+				panel.setFPSLimited(true);
+				panel.setImageSizeDisplayed(true);
 
-				add(panel, BorderLayout.CENTER);
+				capture.add(panel, BorderLayout.CENTER);
 				pack();
 
 				Thread t = new Thread() {
