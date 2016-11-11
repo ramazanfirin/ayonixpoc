@@ -2,6 +2,8 @@ package guru.springframework.swing.components.alarm;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -81,6 +83,27 @@ public class AlarmReportPanel extends JPanel{
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setRowHeight(100);
 		add(scrollPane, "cell 2 3,grow");
+		
+		table.addMouseListener
+	      (
+	        new MouseAdapter()
+	        {
+	          public void mouseClicked(MouseEvent e)
+	          {
+	            if (e.getClickCount() == 2)
+	            {
+	            	JTable table =(JTable) e.getSource();
+	            	int row = table.getSelectedRow();
+	            	Alarm alarm = alarmList.get(row);
+	            	System.out.println(alarm.getId()+" selected");
+	            	AlarmNotificationDialog alarmNotificationDialog =context.getBean(AlarmNotificationDialog.class);
+	            	alarmNotificationDialog.getAlarmNotificationPanel().prepareAlarmValue(alarm);
+	            	alarmNotificationDialog.setVisible(true);
+	            }
+	          }
+	        }
+	);
+	            
 		
 		
 		

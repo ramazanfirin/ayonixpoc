@@ -27,6 +27,7 @@ import guru.springframework.domain.Alarm;
 import guru.springframework.domain.Person;
 import guru.springframework.services.AlarmService;
 import guru.springframework.swing.components.WebcamViewerExample2;
+import guru.springframework.swing.components.alarm.AlarmNotificationDialog;
 import guru.springframework.swing.components.listener.IpCameraListener;
 import guru.springframework.swing.dto.FaceMatchResultDTO;
 import guru.springframework.swing.util.AyonixConstants;
@@ -114,8 +115,7 @@ public	class IdentifyThread extends Thread {
 			if(faceMatchResultDTO.getScore()>AyonixConstants.MATCH_TRASHOLD){ 
 				Person person = personMap.get(faceMatchResultDTO.getAfid());  
 				score = faceMatchResultDTO.getScore();
-				WebcamViewerExample2 a = context.getBean(WebcamViewerExample2.class);
-				a.getAlarmPanel().addImage(image,person.getName(),score,cameraName);
+				
 				Alarm alarm = new Alarm();
 				alarm.setInsertDate(new Date());
 				alarm.setScore(faceMatchResultDTO.getScore());
@@ -132,6 +132,14 @@ public	class IdentifyThread extends Thread {
 				
 				AlarmService service = context.getBean(AlarmService.class);
 				service.save(alarm);
+				
+				WebcamViewerExample2 a = context.getBean(WebcamViewerExample2.class);
+				a.getAlarmPanel().addAlarm(alarm);
+				
+				AlarmNotificationDialog ab = context.getBean(AlarmNotificationDialog.class);
+				ab.getAlarmNotificationPanel().prepareAlarmValue(alarm);
+				ab.setVisible(true);
+				
 				GreetingController controller = context.getBean(GreetingController.class);
 				controller.fireGreeting(alarm);
 			}

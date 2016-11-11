@@ -50,7 +50,6 @@ import guru.springframework.swing.components.alarm.AlarmReportPanel;
 import guru.springframework.swing.components.enrollment.EnrollmentDialog;
 import guru.springframework.swing.components.listener.IpCameraDiscoveryListener;
 import guru.springframework.swing.components.listener.IpCameraListener;
-import guru.springframework.swing.components.mainFrame.AlarmLivePanel;
 import guru.springframework.swing.components.person.PersonListPanel;
 
 
@@ -59,11 +58,11 @@ import guru.springframework.swing.components.person.PersonListPanel;
  * 
  * @author Bartosz Firyn (SarXos)
  */
-@Component
-public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtExceptionHandler, ItemListener {
+//@Component
+public class WebcamViewerExample5 extends JFrame implements Runnable, UncaughtExceptionHandler, ItemListener {
 
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = Logger.getLogger(WebcamViewerExample2.class);
+	final static Logger logger = Logger.getLogger(WebcamViewerExample5.class);
 	private static float MATCH_TRASHOLD=0.8f;
 	
 	@Autowired(required=true)
@@ -87,7 +86,7 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 	private Webcam webcam = null;
 	private WebcamPanel panel = null;
 	private WebcamPicker picker = null;
-	private AlarmLivePanel alarmPanel = null;
+	private AlarmPanel alarmPanel = null;
 	private JButton startButton = new JButton("start identification");
 	FaceID sdk;
 
@@ -97,7 +96,7 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 	  PersonListPanel personListPanel ;
 	  AlarmReportPanel alarmReportPanel;
 	  
-	public WebcamViewerExample2() throws HeadlessException {
+	public WebcamViewerExample5() throws HeadlessException {
 		super();
 		sdk = new FaceID("C:\\Program Files (x86)\\Ayonix\\FaceID\\data\\engine");
 	}
@@ -238,14 +237,14 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 			System.exit(1);
 		}
 
-		webcam.setViewSize(WebcamResolution.VGA.getSize());
+		//webcam.setViewSize(WebcamResolution.VGA.getSize());
 		panel = new WebcamPanel(webcam, false);
 		panel.setFPSDisplayed(true);
 		panel.setFPSLimit(5d);
 		panel.setFPSLimited(true);
 		panel.setImageSizeDisplayed(true);
 		
-		alarmPanel = new AlarmLivePanel(context);
+		alarmPanel = new AlarmPanel();
 		JScrollPane scroll = new JScrollPane(alarmPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		JPanel ass= new JPanel();
 		ass.add(startButton,BorderLayout.NORTH);
@@ -271,7 +270,7 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 	}
 
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new WebcamViewerExample2());
+		SwingUtilities.invokeLater(new WebcamViewerExample5());
 	}
 
 	
@@ -300,7 +299,7 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 				webcam.close();
 
 				webcam = (Webcam) e.getItem();
-				webcam.setViewSize(WebcamResolution.SXGA.getSize());
+				//webcam.setViewSize(WebcamResolution.SXGA.getSize());
 				//webcam.addWebcamListener(this);
 				IpCameraListener cameraListener = new IpCameraListener(sdk, personMap, context);
 				webcam.addWebcamListener(cameraListener);
@@ -332,11 +331,11 @@ public class WebcamViewerExample2 extends JFrame implements Runnable, UncaughtEx
 		}
 	}
 
-	public AlarmLivePanel getAlarmPanel() {
+	public AlarmPanel getAlarmPanel() {
 		return alarmPanel;
 	}
 
-	public void setAlarmPanel(AlarmLivePanel alarmPanel) {
+	public void setAlarmPanel(AlarmPanel alarmPanel) {
 		this.alarmPanel = alarmPanel;
 	}
 
