@@ -33,7 +33,7 @@ public class AlarmLivePanel extends JPanel implements MouseListener{
 		table = new JTable(modelTable);
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setRowHeight(100);
-		add(scrollPane, "cell 2 3,grow");
+		add(scrollPane, "cell 0 3 3 1,grow");
 		
 		
 		table.addMouseListener

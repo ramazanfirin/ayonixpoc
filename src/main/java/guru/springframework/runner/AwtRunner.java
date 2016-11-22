@@ -2,6 +2,8 @@ package guru.springframework.runner;
 
 import guru.springframework.swing.components.WebcamViewerExample2;
 
+import java.awt.Toolkit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -27,7 +29,12 @@ public class AwtRunner implements CommandLineRunner {
 
             @Override
             public void run() {
-                frame.setVisible(true);
+            	Toolkit tk = Toolkit.getDefaultToolkit();
+        		int xSize = ((int) tk.getScreenSize().getWidth());
+        		int ySize = ((int) tk.getScreenSize().getHeight());
+        		frame.setSize(xSize,ySize);
+        		System.out.println("frame size "+ xSize +" "+ ySize);
+            	frame.setVisible(true);
             }
         });
     }

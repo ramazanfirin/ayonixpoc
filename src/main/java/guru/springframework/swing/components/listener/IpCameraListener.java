@@ -69,35 +69,35 @@ public class IpCameraListener implements WebcamListener,WebcamImageTransformer{
 
 	@Override
 	public void webcamImageObtained(WebcamEvent we) {
-		logger.info("request arrived");
-		currentFramePersonMap.clear();
-		
-		try {
-			AynxFace[] faces = WebcamViewerUtil.getFaces(sdk,we.getImage());
-			if(faces.length==0){
-				  return;
-			}
-		
-		
-			for (int i = 0; i < faces.length; i++) {
-				 byte[] afidi1 = WebcamViewerUtil.getAfid(sdk,faces[i]);
-
-				boolean result= isPresentInLastFrame(afidi1);
-				 if(!result){
-			new IdentifyThread(sdk, afidi1, personMap.keySet(), we.getImage(), we.getSource().getName(),personMap,context).start();
-				 }
-				 i++;
-				 //logger.info(Thread.currentThread().getName()+" i="+i);
-				 
-			}
-			lastFramePersonMap.clear();
-			lastFramePersonMap.putAll(currentFramePersonMap);
-//			clearLastFrame(currentFrameAfidList);
-			
-		
-		   }catch (Exception e) {
-				logger.error(e,e);
-			}
+//		logger.info("request arrived");
+//		currentFramePersonMap.clear();
+//		
+//		try {
+//			AynxFace[] faces = WebcamViewerUtil.getFaces(sdk,we.getImage());
+//			if(faces.length==0){
+//				  return;
+//			}
+//		
+//		
+//			for (int i = 0; i < faces.length; i++) {
+//				 byte[] afidi1 = WebcamViewerUtil.getAfid(sdk,faces[i]);
+//
+//				boolean result= isPresentInLastFrame(afidi1);
+//				 if(!result){
+//			new IdentifyThread(sdk, afidi1, personMap.keySet(), we.getImage(), we.getSource().getName(),personMap,context).start();
+//				 }
+//				 i++;
+//				 //logger.info(Thread.currentThread().getName()+" i="+i);
+//				 
+//			}
+//			lastFramePersonMap.clear();
+//			lastFramePersonMap.putAll(currentFramePersonMap);
+////			clearLastFrame(currentFrameAfidList);
+//			
+//		
+//		   }catch (Exception e) {
+//				logger.error(e,e);
+//			}
 		
 
 		

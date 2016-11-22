@@ -34,7 +34,7 @@ import guru.springframework.swing.util.AyonixConstants;
 
 public	class IdentifyThread extends Thread {
 	
-	final static Logger logger = Logger.getLogger(IpCameraListener.class);
+	final static Logger logger = Logger.getLogger(IdentifyThread.class);
 		
 		FaceID sdk;
 		byte[] query;
@@ -45,7 +45,7 @@ public	class IdentifyThread extends Thread {
 		Map<byte[],Person> personMap = new HashMap<byte[],Person>();
 		ApplicationContext context;
 		
-		int parallelizm=4;
+		int parallelizm=1;
 		ExecutorService executorService = Executors.newFixedThreadPool(parallelizm);
 		
 		
@@ -67,10 +67,11 @@ public	class IdentifyThread extends Thread {
 				Set<Callable<ResultDto>> callables =getTaskList(afids,query);
 				List<Future<ResultDto>> futures = executorService.invokeAll(callables);
 				//FaceMatchResultDTO faceMatchResultDTO = WebcamViewerUtil.compare(sdk, query, afids);
+				long d = System.currentTimeMillis();
+				 logger.info("thread duration="+(d-s));
 				FaceMatchResultDTO faceMatchResultDTO = sort(futures); 
 				createAlarm(faceMatchResultDTO, image,cameraNAme);
-				 long d = System.currentTimeMillis();
-				 logger.info("thread duration="+(d-s));
+				 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

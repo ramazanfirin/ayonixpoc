@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import guru.springframework.domain.Alarm;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 
@@ -22,6 +23,8 @@ public class AlarmNotificationPanel extends JPanel{
 	
 	public AlarmNotificationPanel() {
 		setLayout(new MigLayout("", "[][289.00]", "[][][][][][][]"));
+		setSize(500, 400);
+		setPreferredSize(new Dimension(500, 400));
 		
 		JLabel lblNewLabel = new JLabel("Name");
 		add(lblNewLabel, "cell 0 0");
@@ -36,17 +39,13 @@ public class AlarmNotificationPanel extends JPanel{
 		surnameLabel = new JLabel("New label");
 		add(surnameLabel, "cell 1 1");
 		
-		JLabel lblNewLabel_2 = new JLabel("Source Image");
+		JLabel lblNewLabel_2 = new JLabel("Images");
 		add(lblNewLabel_2, "cell 0 2");
 		
 		sourcaImageLabel = new JLabel("");
-		add(sourcaImageLabel, "cell 1 2");
+		add(sourcaImageLabel, "flowx,cell 1 2");
 		
-		JLabel lblNewLabel_3 = new JLabel("Current Image");
-		add(lblNewLabel_3, "cell 0 3");
 		
-		currentImageLabel = new JLabel("");
-		add(currentImageLabel, "cell 1 3");
 		
 		JLabel lblScore = new JLabel("Score");
 		add(lblScore, "cell 0 4");
@@ -59,6 +58,9 @@ public class AlarmNotificationPanel extends JPanel{
 		
 		dateLabel = new JLabel("New label");
 		add(dateLabel, "cell 1 5");
+		
+		currentImageLabel = new JLabel("");
+		add(currentImageLabel, "cell 1 2");
 		
 
 	}
